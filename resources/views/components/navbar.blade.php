@@ -36,7 +36,14 @@
         
         <div class="profile-box">
             <div class="profile-img">
-                <img src="{{ asset(auth()->user()->profile_picture) }}" alt="Profile">
+                @if (Str::startsWith(auth()->user()->profile_picture, 'data:image'))
+                            
+                    <img src="{{ auth()->user()->profile_picture }}" class="rounded-circle mb-3 border-4" style="height: 200px; width: 200px;" alt="Profile Picture" id="profilePicture">
+                @else
+                    
+                    <img src="{{ asset(auth()->user()->profile_picture) }}" class="rounded-circle mb-3 border-4" style="height: 200px; width: 200px;" alt="Profile Picture" id="profilePicture">
+                @endif
+
             </div>
             <div class="dropdown">
                 <a class="nav-link dropdown-toggle text-white" href="#" id="profileDropdown" role="button"
