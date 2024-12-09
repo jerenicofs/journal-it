@@ -93,21 +93,18 @@ class UserController extends Controller
         ]);
 
         $user = Auth::user();
+  
+        $imageData = base64_encode(file_get_contents($request->file('profile_picture')->path()));
+        $mimeType = $request->file('profile_picture')->getClientMimeType();
+        $base64Image = "data:$mimeType;base64,$imageData";
 
-        $filename = $user->name . '.' . $request->file('profile_picture')->getClientOriginalExtension();
-        $destinationPath = sys_get_temp_dir();
-
-        try {
-            $request->file('profile_picture')->move($destinationPath, $filename);
-        } catch (\Exception $e) {
-            return back()->with('fail', 'Error moving the file: ' . $e->getMessage());
-        }
-
-        $user->profile_picture = '/tmp/' . $filename;
-        $user->save();
+        $user->update([
+            'profile_picture' => $base64Image,
+        ]);
 
         return back()->with('success', 'Profile picture updated successfully!');
     }
+
 
 
     public function updateBio(Request $request)

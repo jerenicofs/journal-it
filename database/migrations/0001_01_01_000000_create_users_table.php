@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('password');
             $table->integer('age')->nullable();
             $table->string('gender')->nullable();
-            $table->string('profile_picture')->nullable();
+            $table->text('profile_picture')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

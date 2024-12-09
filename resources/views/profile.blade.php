@@ -23,11 +23,15 @@
             <div class="card text-center bg-theme hover:bg-theme border-3 border-white transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-lg text-white h-100 border border-b-2">
                 <div class="card-body d-flex flex-column align-items-center">
                     <div class="flex flex-col justify-center align-items-center mb-4 mt-10">
-                        <img src="{{ asset($user->profile_picture) }}" 
-                             class="rounded-circle mb-3 border-4" 
-                             style="height: 200px; width: 200px;" 
-                             alt="Profile Picture" 
-                             id="profilePicture">
+                        
+                        @if (Str::startsWith($user->profile_picture, 'data:image'))
+                            
+                            <img src="{{ $user->profile_picture }}" class="rounded-circle mb-3 border-4" style="height: 200px; width: 200px;" alt="Profile Picture" id="profilePicture">
+                        @else
+                            
+                            <img src="{{ asset($user->profile_picture) }}" class="rounded-circle mb-3 border-4" style="height: 200px; width: 200px;" alt="Profile Picture" id="profilePicture">
+                        @endif
+
                              <form id="uploadForm" action="/upload-profile-picture" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <input type="file" id="uploadPicture" name="profile_picture" accept="image/*" class="hidden" onchange="previewImage(event)">
