@@ -94,18 +94,8 @@ class UserController extends Controller
 
         $user = Auth::user();
 
-        $destinationPath = public_path('assets/profilePic');
-
-        // Debugging the directory path and permissions
-        if (!file_exists($destinationPath)) {
-            return back()->with('fail', 'Directory does not exist: ' . $destinationPath);
-        }
-
-        if (!is_writable($destinationPath)) {
-            return back()->with('fail', 'Directory is not writable: ' . $destinationPath);
-        }
-
         $filename = $user->name . '.' . $request->file('profile_picture')->getClientOriginalExtension();
+        $destinationPath = sys_get_temp_dir();
 
         try {
             $request->file('profile_picture')->move($destinationPath, $filename);
@@ -113,12 +103,12 @@ class UserController extends Controller
             return back()->with('fail', 'Error moving the file: ' . $e->getMessage());
         }
 
-        $user->update([
-            'profile_picture' => 'assets/profilePic/' . $filename,
-        ]);
+        $user->profile_picture = '/tmp/' . $filename;
+        $user->save();
 
         return back()->with('success', 'Profile picture updated successfully!');
     }
+
 
     public function updateBio(Request $request)
     {
