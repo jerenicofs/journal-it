@@ -38,12 +38,11 @@
             <div class="profile-img">
                 @if (Str::startsWith(auth()->user()->profile_picture, 'data:image'))
                             
-                    <img src="{{ auth()->user()->profile_picture }}" class="rounded-circle mb-3 border-4" style="height: 200px; width: 200px;" alt="Profile Picture" id="profilePicture">
+                    <img src="{{ auth()->user()->profile_picture }}" alt="Profile Picture">
                 @else
                     
-                    <img src="{{ asset(auth()->user()->profile_picture) }}" class="rounded-circle mb-3 border-4" style="height: 200px; width: 200px;" alt="Profile Picture" id="profilePicture">
+                    <img src="{{ asset(auth()->user()->profile_picture) }}" alt="Profile Picture">
                 @endif
-
             </div>
             <div class="dropdown">
                 <a class="nav-link dropdown-toggle text-white" href="#" id="profileDropdown" role="button"
