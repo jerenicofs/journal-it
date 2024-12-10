@@ -192,7 +192,7 @@
                     </div>
 
                 @empty
-                    <h1 class="text-center text-gray-700">There is no to-do list. Click the plus button to add your to-do!
+                    <h1 class="text-center font-bold text-3xl text-white">There is no to-do list. Click the plus button to add your to-do!
                     </h1>
                 @endforelse
             </div>

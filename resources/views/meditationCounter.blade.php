@@ -31,7 +31,7 @@
 
 
 
-        <div class="min-h-screen bg-gray-900 text-white flex items-center justify-center">
+        <div class="min-h-screen bg-customDark text-white flex items-center justify-center">
 
 
             <div class="text-center space-y-8">
