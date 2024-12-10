@@ -83,6 +83,8 @@ class UserController extends Controller
 
         $user = Auth::user();
         $latestAchievements = $user->achievements()->wherePivot('status', 'Unlocked')->orderBy('pivot_updated_at', 'desc')->limit(3)->get();
+        $userAchiement = new UserAchievementController();
+        $userAchiement->giveAllAchievements($user);
         return view('profile', compact('user', 'latestAchievements'));
     }
 
